@@ -374,3 +374,22 @@ func (g Gimel) Ln() Gimel {
 	}
 	return a
 }
+
+// log returns the logarithm of g to the given base.
+func (g Gimel) Log(base Gimel) Gimel {
+	if g.neg {
+		panic("Cannot take log of negative Gimel number")
+	}
+	return g.Ln().Div(base.Ln())
+	//return g.Ln().Div((base).Ln())
+}
+
+// log10 returns the base 10 logarithm of g. Is an alias for log(10).
+func (g Gimel) Log10() Gimel {
+	a, ok := FromBigInt(tenValue, g.prec)
+	if !ok {
+		panic("failed to parse big int")
+	}
+	return g.Log(a)
+	// return g.Log(10)
+}
