@@ -1,10 +1,11 @@
 package gimel
 
 import (
-	"github.com/stretchr/testify/assert"
 	"math/big"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var prec = big.NewInt(5)
@@ -168,4 +169,11 @@ func TestGimel_Text(t *testing.T) {
 	assert.Equal(t, "45,600,000,000,000,000", gen(false, 456, 16).Text(','))
 
 	assert.Equal(t, "1,234.5", gen(false, 12345, 3).Text(','))
+}
+
+// if Log10 works, Log() works, and Ln() works
+func TestGimel_Log10(t *testing.T) {
+	assert.Equal(t, "1", gen(false, 10, 0).Log10().Text(0))
+	assert.Equal(t, "2", gen(false, 100, 0).Log10().Text(0))
+	assert.Equal(t, "3", gen(false, 1000, 0).Log10().Text(0))
 }
